@@ -46,9 +46,10 @@ namespace Shopomo.Controllers
                 {
                     if (password == user.Password)
                     {
+                        // invalidate the password after one use
                         user.Password = null;
                         user.PasswordGeneratedDate = null;
-                        return "Login Success";
+                        return "Login success";
                     }
                     else
                         return "Invalid password";
@@ -58,7 +59,7 @@ namespace Shopomo.Controllers
 
             }
             else
-                return "User Not Found";
+                return "User not found";
         }
 
         // GET: Password
