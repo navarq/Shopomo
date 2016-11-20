@@ -13,6 +13,8 @@ namespace Shopomo.Controllers
         private static User user = new User { Username = "JoeBloggs" };
         private int timeoutPassword = 30;
 
+        private static List<InvalidLogin> InvalidLogins = new List<InvalidLogin>();
+
         public string GeneratePassword(string username)
         {
             if (username == user.Username)
@@ -52,20 +54,31 @@ namespace Shopomo.Controllers
                         return "Login success";
                     }
                     else
+                    {
+                        InvalidLogins.Add(new InvalidLogin { Username = username, Attempt = DateTime.UtcNow });
                         return "Invalid password";
+                    }
+                        
                 }
                 else
+                {
+                    InvalidLogins.Add(new InvalidLogin { Username = username, Attempt = DateTime.UtcNow });
                     return "Invalid password";
+                }
 
             }
             else
+            {
+                InvalidLogins.Add(new InvalidLogin { Username = username, Attempt = DateTime.UtcNow });
                 return "User not found";
+            }
+                
         }
 
         // GET: Password
         public ActionResult Index()
         {
-            return View();
+            return View(InvalidLogins);
         }
     }
 }

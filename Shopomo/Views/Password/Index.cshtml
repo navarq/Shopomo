@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Shopomo.Models.InvalidLogin>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Invalid Login Attempts</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Attempt)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Attempt)
+        </td>
+
+    </tr>
+}
+
+</table>
